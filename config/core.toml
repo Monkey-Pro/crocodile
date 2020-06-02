@@ -27,14 +27,14 @@ keyfile="key.pem"
 
 # crocodile server
 [server]
-port = 8080
+port = 8380
 maxhttptime = "10s" # 秒
 [server.db]
 # mysql: [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
 #        root:123456@tcp(localhost:3306)/crocodile?charset=utf8mb4&parseTime=True&loc=Local
 #        mysql需要提前建好数据库
 drivename = "mysql"
-dsn = "root:crocodile@tcp(127.0.0.1:3306)/crocodile?charset=utf8mb4&parseTime=True&loc=Local"
+dsn = "root:yw123456@tcp(192.168.2.110:3308)/crocodile?charset=utf8mb4&parseTime=True&loc=Local"
 
 # sqlite3暂时不支持
 # sqlite3: crocodile.db 
@@ -45,18 +45,18 @@ maxconn = 20
 maxquerytime = "10s"
 
 [server.redis]
-addr = "127.0.0.1:6379"
-password = ""
+addr = "192.168.2.110:6379"
+password = "yw123456!@#"
 # 消息通知配置
 [notify]
 # 邮箱
 [notify.email]
 enable = false
-smtphost = "smtp.163.com"
+smtphost = "smtp.uweidao.cn"
 port = 25
-username = "user@163.com"
-password = "password"
-from = "from@163.com"
+username = "noreply@uweidao.cn"
+password = "U1mw2NqKKlYlCPZv"
+from = "noreply@uweidao.cn"
 tls = false
 # 匿名发送
 anonymous = false
@@ -94,9 +94,9 @@ webhookurl = "http://127.0.0.1:8088"
 # 执行器设置
 [client]
 # client port
-port =  8088     # 0为随机端口
+port =  8381     # 0为随机端口
 # 调度中心集群地址，可以设置多个防止单点故障
-serveraddrs = ["127.0.0.1:8080"]
+serveraddrs = ["127.0.0.1:8380"]
 # 将保存只此主机组，如果不存在或者选项为空将忽略
 hostgroup = ""
 # 权重

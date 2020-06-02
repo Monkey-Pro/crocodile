@@ -4,11 +4,11 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/labulaka521/crocodile/core/utils/define"
+	"crocodile/core/utils/define"
 
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/config"
-	"github.com/labulaka521/crocodile/core/model"
+	"crocodile/common/log"
+	"crocodile/core/config"
+	"crocodile/core/model"
 	"go.uber.org/zap"
 )
 

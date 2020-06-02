@@ -3,13 +3,13 @@ package install
 import (
 	"context"
 
+	"crocodile/common/log"
+	"crocodile/core/config"
+	"crocodile/core/model"
+	"crocodile/core/utils/define"
+	"crocodile/core/utils/resp"
+	"crocodile/core/version"
 	"github.com/gin-gonic/gin"
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/config"
-	"github.com/labulaka521/crocodile/core/model"
-	"github.com/labulaka521/crocodile/core/utils/define"
-	"github.com/labulaka521/crocodile/core/utils/resp"
-	"github.com/labulaka521/crocodile/core/version"
 	"go.uber.org/zap"
 )
 

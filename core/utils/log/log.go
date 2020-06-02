@@ -1,9 +1,9 @@
 package log
 
 import (
+	"crocodile/common/log"
+	"crocodile/core/config"
 	"fmt"
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/config"
 	"os"
 )
 

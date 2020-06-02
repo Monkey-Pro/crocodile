@@ -1,11 +1,11 @@
 package model
 
 import (
+	"crocodile/common/log"
+	"crocodile/core/config"
 	"github.com/casbin/casbin/v2"
 	"github.com/casbin/casbin/v2/model"
 	gormadapter "github.com/casbin/gorm-adapter/v2"
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/config"
 	"go.uber.org/zap"
 )
 

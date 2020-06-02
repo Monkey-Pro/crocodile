@@ -10,11 +10,11 @@ import (
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 
-	"github.com/labulaka521/crocodile/common/jwt"
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/config"
-	"github.com/labulaka521/crocodile/core/model"
-	"github.com/labulaka521/crocodile/core/utils/resp"
+	"crocodile/common/jwt"
+	"crocodile/common/log"
+	"crocodile/core/config"
+	"crocodile/core/model"
+	"crocodile/core/utils/resp"
 )
 
 const (

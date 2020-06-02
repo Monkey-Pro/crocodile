@@ -13,7 +13,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/labulaka521/crocodile/core/utils/resp"
+	"crocodile/core/utils/resp"
 )
 
 var _ TaskRuner = DataCode{}

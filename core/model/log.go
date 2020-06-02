@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"strings"
 
+	"crocodile/common/db"
+	"crocodile/common/log"
+	"crocodile/common/utils"
+	"crocodile/core/utils/define"
 	"github.com/gin-gonic/gin"
-	"github.com/labulaka521/crocodile/common/db"
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/common/utils"
-	"github.com/labulaka521/crocodile/core/utils/define"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )

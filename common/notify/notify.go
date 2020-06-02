@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/labulaka521/crocodile/common/log"
+	"crocodile/common/log"
 	"go.uber.org/zap"
 )
 

@@ -11,11 +11,11 @@ import (
 	"strings"
 	"time"
 
+	"crocodile/common/log"
+	"crocodile/core/config"
+	"crocodile/core/model"
+	"crocodile/core/utils/define"
 	"github.com/gin-gonic/gin"
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/config"
-	"github.com/labulaka521/crocodile/core/model"
-	"github.com/labulaka521/crocodile/core/utils/define"
 	"go.uber.org/zap"
 )
 
@@ -326,7 +326,7 @@ func Oprtation() func(c *gin.Context) {
 				newData = *hostgroupData
 			case task:
 				taskData, err := model.GetTaskByName(ctx, name)
-				if err != nil  {
+				if err != nil {
 					log.Error("model.GetTaskByName", zap.String("name", name), zap.Error(err))
 					c.Next()
 					return

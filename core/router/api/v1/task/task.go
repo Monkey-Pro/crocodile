@@ -11,18 +11,18 @@ import (
 	"strconv"
 	"time"
 
+	"crocodile/common/log"
+	"crocodile/common/utils"
+	"crocodile/core/config"
+	"crocodile/core/middleware"
+	"crocodile/core/model"
+	"crocodile/core/schedule"
+	"crocodile/core/utils/define"
+	"crocodile/core/utils/resp"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
 	"github.com/gorhill/cronexpr"
 	"github.com/gorilla/websocket"
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/common/utils"
-	"github.com/labulaka521/crocodile/core/config"
-	"github.com/labulaka521/crocodile/core/middleware"
-	"github.com/labulaka521/crocodile/core/model"
-	"github.com/labulaka521/crocodile/core/schedule"
-	"github.com/labulaka521/crocodile/core/utils/define"
-	"github.com/labulaka521/crocodile/core/utils/resp"
 	"go.uber.org/zap"
 )
 
@@ -677,7 +677,7 @@ func RealRunTaskLog(c *gin.Context) {
 			err = conn.WriteMessage(websocket.TextMessage, erroutput)
 			if err != nil {
 				log.Error("WriteMessage failed", zap.Error(err))
-				
+
 			}
 			return
 		}

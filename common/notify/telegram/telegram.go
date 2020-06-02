@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/labulaka521/crocodile/common/notify"
+	"crocodile/common/notify"
 	tb "gopkg.in/tucnak/telebot.v2"
 )
 

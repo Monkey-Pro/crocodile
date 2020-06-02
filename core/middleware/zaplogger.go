@@ -1,9 +1,9 @@
 package middleware
 
 import (
+	"crocodile/common/log"
+	"crocodile/core/utils/resp"
 	"github.com/gin-gonic/gin"
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/utils/resp"
 	"go.uber.org/zap"
 	"strings"
 	"time"

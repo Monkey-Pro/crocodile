@@ -11,7 +11,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/labulaka521/crocodile/common/notify"
+	"crocodile/common/notify"
 )
 
 // getsign generate a sign when secure level is needsign

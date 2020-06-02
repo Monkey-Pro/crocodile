@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/utils/define"
+	"crocodile/common/log"
+	"crocodile/core/utils/define"
 	"go.uber.org/zap"
 )
 

@@ -8,9 +8,9 @@ import (
 	"net/smtp"
 	"strings"
 
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/common/notify"
-	"github.com/labulaka521/crocodile/common/utils"
+	"crocodile/common/log"
+	"crocodile/common/notify"
+	"crocodile/common/utils"
 	"go.uber.org/zap"
 )
 

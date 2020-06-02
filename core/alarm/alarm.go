@@ -6,20 +6,20 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"time"
 	"strconv"
+	"time"
 
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/common/notify"
-	"github.com/labulaka521/crocodile/common/notify/dingding"
-	"github.com/labulaka521/crocodile/common/notify/email"
-	"github.com/labulaka521/crocodile/common/notify/slack"
-	"github.com/labulaka521/crocodile/common/notify/telegram"
-	"github.com/labulaka521/crocodile/common/notify/wechat"
-	"github.com/labulaka521/crocodile/common/utils"
-	"github.com/labulaka521/crocodile/core/config"
-	"github.com/labulaka521/crocodile/core/model"
-	"github.com/labulaka521/crocodile/core/utils/define"
+	"crocodile/common/log"
+	"crocodile/common/notify"
+	"crocodile/common/notify/dingding"
+	"crocodile/common/notify/email"
+	"crocodile/common/notify/slack"
+	"crocodile/common/notify/telegram"
+	"crocodile/common/notify/wechat"
+	"crocodile/common/utils"
+	"crocodile/core/config"
+	"crocodile/core/model"
+	"crocodile/core/utils/define"
 	"go.uber.org/zap"
 )
 
@@ -193,7 +193,7 @@ func sendalarm(notifyuids []string, taskname, taskid, starttime, endtime, status
 		if user.Telegram != "" {
 			alarmTelegram = append(alarmTelegram, user.Telegram)
 		}
-		alarmUsernNames = append(alarmUsernNames,user.Name)
+		alarmUsernNames = append(alarmUsernNames, user.Name)
 	}
 
 	notifymsg := notifymsg{

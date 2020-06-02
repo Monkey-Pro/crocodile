@@ -3,8 +3,8 @@ package model
 import (
 	"testing"
 
-	"github.com/labulaka521/crocodile/core/config"
-	mylog "github.com/labulaka521/crocodile/core/utils/log"
+	"crocodile/core/config"
+	mylog "crocodile/core/utils/log"
 )
 
 func Test_countColums(t *testing.T) {

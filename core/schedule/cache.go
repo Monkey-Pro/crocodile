@@ -9,9 +9,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/tasktype"
-	"github.com/labulaka521/crocodile/core/utils/define"
+	"crocodile/common/log"
+	"crocodile/core/tasktype"
+	"crocodile/core/utils/define"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )

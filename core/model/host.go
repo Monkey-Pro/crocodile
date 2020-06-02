@@ -6,11 +6,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/labulaka521/crocodile/common/db"
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/common/utils"
-	pb "github.com/labulaka521/crocodile/core/proto"
-	"github.com/labulaka521/crocodile/core/utils/define"
+	"crocodile/common/db"
+	"crocodile/common/log"
+	"crocodile/common/utils"
+	pb "crocodile/core/proto"
+	"crocodile/core/utils/define"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )

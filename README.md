@@ -124,11 +124,11 @@ Then open url`http://ip:8080`
     Multiple dispatch centers can be started to prevent single points of failure from causing dispatch to hang up    
 
     ```shell
-    ./crocodile server -c core.toml
+    ./crocodile server -c ./config/core.toml
     ```
 - Run as a Worker (host) node    
     ```
-    /crocodile client -c core.toml
+    /crocodile client -c ./config/core.toml
     ```
 
 - View version compilation information

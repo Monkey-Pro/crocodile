@@ -3,7 +3,7 @@ package schedule
 import (
 	"testing"
 
-	"github.com/labulaka521/crocodile/core/utils/define"
+	"crocodile/core/utils/define"
 )
 
 func Test_generatename(t *testing.T) {

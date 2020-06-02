@@ -7,10 +7,10 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/config"
-	"github.com/labulaka521/crocodile/core/model"
-	"github.com/labulaka521/crocodile/core/utils/define"
+	"crocodile/common/log"
+	"crocodile/core/config"
+	"crocodile/core/model"
+	"crocodile/core/utils/define"
 	"go.uber.org/zap"
 )
 

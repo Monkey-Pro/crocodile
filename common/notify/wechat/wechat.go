@@ -1,11 +1,11 @@
 package wechat
 
 import (
+	"crocodile/common/notify"
 	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/labulaka521/crocodile/common/notify"
 	"io/ioutil"
 	"net/http"
 	"strings"

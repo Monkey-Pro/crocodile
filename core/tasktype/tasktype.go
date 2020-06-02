@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"io"
 
-	pb "github.com/labulaka521/crocodile/core/proto"
-	"github.com/labulaka521/crocodile/core/utils/define"
+	pb "crocodile/core/proto"
+	"crocodile/core/utils/define"
 )
 
 const (

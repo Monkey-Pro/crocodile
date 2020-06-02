@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/labulaka521/crocodile/common/notify"
+	"crocodile/common/notify"
 )
 
 // Slack send conf

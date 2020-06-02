@@ -2,17 +2,17 @@ package schedule
 
 import (
 	"context"
+	"crocodile/core/utils/resp"
 	"fmt"
-	"github.com/labulaka521/crocodile/core/utils/resp"
 	"io"
 	"net"
 	"strings"
 	"sync"
 
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/model"
-	pb "github.com/labulaka521/crocodile/core/proto"
-	"github.com/labulaka521/crocodile/core/tasktype"
+	"crocodile/common/log"
+	"crocodile/core/model"
+	pb "crocodile/core/proto"
+	"crocodile/core/tasktype"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/peer"
@@ -151,10 +151,9 @@ func (hs *HeartbeatService) RegistryHost(ctx context.Context, req *pb.RegistryRe
 	req.Ip = ip
 	addr := fmt.Sprintf("%s:%d", req.Ip, req.Port)
 
-
 	isinstall, err := model.QueryIsInstall(ctx)
 	if err != nil {
-		log.Error("model.QueryIsInstall failed",zap.Error(err))
+		log.Error("model.QueryIsInstall failed", zap.Error(err))
 		return &pb.Empty{}, err
 	}
 

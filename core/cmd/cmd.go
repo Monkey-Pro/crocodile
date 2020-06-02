@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/labulaka521/crocodile/core/cert"
-	"github.com/labulaka521/crocodile/core/version"
+	"crocodile/core/cert"
+	"crocodile/core/version"
 	"github.com/spf13/cobra"
 )
 

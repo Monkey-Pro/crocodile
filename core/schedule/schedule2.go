@@ -279,8 +279,6 @@ func (t *task2) GetTaskRealLog(taskruntype define.TaskRespType, realid string, o
 
 // cleantaskinfos return task's parent child id
 func (t *task2) cleantaskinfos() {
-	// 暂停三秒后再删除
-	time.Sleep(time.Second * 3)
 	log.Debug("start clean old key data", zap.String("task", t.name))
 	taskinfos := "task:" + t.id
 	var res []string
@@ -306,7 +304,13 @@ func (t *task2) gettaskinfos() ([]string, error) {
 	if err != nil {
 		return nil, fmt.Errorf("t.redis.LRange failed: %w", err)
 	}
-	return res, err
+	if len(res) == 0 {
+		fmt.Println("--------------")
+		fmt.Println(t.redis.Keys("task*").Val())
+		fmt.Println("--------------")
+		return nil, errors.New("get key taskinfos is empty")
+	}
+	return res, nil
 }
 
 func (t *task2) addtaskinfo(taskruntype define.TaskRespType, realid string) error {
@@ -453,14 +457,15 @@ func (t *task2) savetasklog() error {
 		tasklogres.TaskResps = append(tasklogres.TaskResps, &tr)
 	}
 
-	// clean keys
-	go t.cleantaskinfos()
-	// check task res
+	t.cleantaskinfos()
 	go alarm.JudgeNotify(tasklogres)
-	// save log
-	err = model.SaveLog(context.Background(), tasklogres)
-
-	return err
+	go func() {
+		err = model.SaveLog(context.Background(), tasklogres)
+		if err != nil {
+			log.Error("save task log failed", zap.Error(err))
+		}
+	}()
+	return nil
 }
 
 func (t *task2) writelog(tasrunktype define.TaskRespType, realid string, value []byte) {
@@ -503,7 +508,7 @@ func (t *task2) getreturncode(tasrunktype define.TaskRespType, realid string) (i
 	return tasktype.DefaultExitCode, err
 }
 
-// getlock
+// getlock get task
 func (t *task2) getlock(randstr string) (bool, error) {
 	log.Debug("start get lock", zap.String("taskid", t.id))
 	lockid := "task:runlock:" + t.id
@@ -551,7 +556,7 @@ func (t *task2) islock() (bool, error) {
 
 // RunTask start run task
 func (t *task2) StartRun(trigger define.Trigger) {
-	// log.Debug("start ", fields ...zap.Field)
+
 	lockid := "task:runlock:" + t.id
 	ok, err := t.islock()
 
@@ -569,7 +574,7 @@ func (t *task2) StartRun(trigger define.Trigger) {
 
 	// 开始抢锁，如果抢到就继续运行任务
 	// 为了减少时间差带来获取锁的问题，在获取锁前随机停止0-10毫秒毫秒
-	time.Sleep(time.Microsecond * time.Duration(rand.Int()%100))
+	// time.Sleep(time.Microsecond * time.Duration(rand.Int()%100))
 	ok, err = t.getlock(randstr)
 	if err != nil {
 		log.Error("t.getlock failed", zap.Error(err))
@@ -590,10 +595,16 @@ func (t *task2) StartRun(trigger define.Trigger) {
 		for {
 			select {
 			case <-stopexpire:
-				log.Debug("stop expire lock", zap.String("lockid", lockid))
+				log.Info("stop expire lock", zap.String("lockid", lockid))
+				ticker.Stop()
 				return
 			case <-ticker.C:
-				t.redis.Expire(lockid, t.cronsub)
+				if t.cronsub >= time.Second {
+					t.redis.Expire(lockid, t.cronsub)
+				} else {
+					t.redis.PExpire(lockid, t.cronsub)
+				}
+				
 			}
 		}
 	}()
@@ -910,7 +921,7 @@ Check:
 			t.setdata(taskruntype, id, define.TsFail, taskstatus)
 		}
 	} else {
-		log.Error("task run success", zap.String("task", realtask.name))
+		log.Debug("task run success", zap.String("task", realtask.name))
 		t.setdata(taskruntype, id, define.TsFinish, taskstatus)
 		// 如有任务失败，那么还未运行的任务可以标记为取消
 	}
@@ -1053,7 +1064,7 @@ func (s *cacheSchedule2) runSchedule(taskid string) {
 	task.cronsub = expr.Next(last).Sub(last) / 4
 	if task.cronsub > time.Second*30 {
 		task.cronsub = time.Second * 30
-	}
+	} 
 
 	for {
 		next = expr.Next(last)

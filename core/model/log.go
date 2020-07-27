@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"strings"
 
-	"crocodile/common/db"
-	"crocodile/common/log"
-	"crocodile/common/utils"
-	"crocodile/core/utils/define"
 	"github.com/gin-gonic/gin"
+	"github.com/labulaka521/crocodile/common/db"
+	"github.com/labulaka521/crocodile/common/log"
+	"github.com/labulaka521/crocodile/common/utils"
+	"github.com/labulaka521/crocodile/core/utils/define"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
@@ -40,12 +40,8 @@ func SaveLog(ctx context.Context, l *define.Log) error {
 	if err != nil {
 		return fmt.Errorf("db.GetConn failed: %w", err)
 	}
+	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, savesql)
-	//defer conn.Close()
-	defer func() {
-		stmt.Close()
-		conn.Close()
-	}()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
@@ -504,16 +500,12 @@ func GetNotifyByUID(ctx context.Context, uid string) ([]define.Notify, error) {
 	if err != nil {
 		return notifys, fmt.Errorf("db.GetConn failed: %w", err)
 	}
+	defer conn.Close()
 
 	stmt, err := conn.PrepareContext(ctx, getsql)
 	if err != nil {
 		return notifys, fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-
-	defer func() {
-		stmt.Close()
-		conn.Close()
-	}()
 
 	rows, err := stmt.QueryContext(ctx, false, uid)
 	if err != nil {
@@ -531,7 +523,6 @@ func GetNotifyByUID(ctx context.Context, uid string) ([]define.Notify, error) {
 		notify.NotifyTimeDesc = utils.UnixToStr(notify.NotifyTime)
 		notifys = append(notifys, notify)
 	}
-
 	return notifys, nil
 }
 

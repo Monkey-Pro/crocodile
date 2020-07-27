@@ -13,7 +13,7 @@ import (
 	"strconv"
 	"time"
 
-	"crocodile/core/utils/resp"
+	"github.com/labulaka521/crocodile/core/utils/resp"
 )
 
 var _ TaskRuner = DataCode{}
@@ -156,7 +156,6 @@ func runnodejs(ctx context.Context, code string) (*exec.Cmd, string, error) {
 // Golang
 const (
 	modcontent = `module crocodile
-
 go `
 	modname   = "go.mod"
 	gonamepre = "crocodile_"
@@ -227,7 +226,7 @@ func runwindowsbat(ctx context.Context, code string) (*exec.Cmd, string, error) 
 }
 
 // Type return task run lang
-func (ds DataCode)Type() string {
+func (ds DataCode) Type() string {
 	return ds.Lang.String()
 }
 

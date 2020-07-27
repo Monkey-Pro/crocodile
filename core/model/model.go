@@ -7,10 +7,10 @@ import (
 	"strings"
 	"time"
 
-	"crocodile/common/db"
-	"crocodile/common/log"
-	"crocodile/core/config"
-	"crocodile/core/utils/define"
+	"github.com/labulaka521/crocodile/common/db"
+	"github.com/labulaka521/crocodile/common/log"
+	"github.com/labulaka521/crocodile/core/config"
+	"github.com/labulaka521/crocodile/core/utils/define"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
@@ -54,7 +54,7 @@ const (
 	HostGroupID
 	// CreateByID check use is used by hostgroup or tasks
 	CreateByID
-	// UserName check exist user name 
+	// UserName check exist user name
 	UserName
 )
 

@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"time"
 
-	"crocodile/common/log"
-	"crocodile/core/utils/resp"
+	"github.com/labulaka521/crocodile/common/log"
+	"github.com/labulaka521/crocodile/core/utils/resp"
 	"go.uber.org/zap"
 )
 
@@ -28,8 +28,7 @@ type DataAPI struct {
 // Body
 // Test
 
-
-func (da DataAPI)Type() string {
+func (da DataAPI) Type() string {
 	return "api"
 }
 

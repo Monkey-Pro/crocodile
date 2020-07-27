@@ -7,11 +7,13 @@ import (
 	"strings"
 	"time"
 
-	"crocodile/common/db"
-	"crocodile/common/log"
-	"crocodile/common/utils"
-	"crocodile/core/config"
-	"crocodile/core/utils/define"
+	assetfs "github.com/elazarl/go-bindata-assetfs"
+	"github.com/labulaka521/crocodile/common/db"
+	"github.com/labulaka521/crocodile/common/log"
+	"github.com/labulaka521/crocodile/common/utils"
+	"github.com/labulaka521/crocodile/core/config"
+	"github.com/labulaka521/crocodile/core/utils/asset"
+	"github.com/labulaka521/crocodile/core/utils/define"
 	"go.uber.org/zap"
 )
 
@@ -79,12 +81,11 @@ func StartInstall(ctx context.Context, username, password string) error {
 		return fmt.Errorf("db.GetConn failed: %w", err)
 	}
 
-	/*fs := &assetfs.AssetFS{
+	fs := &assetfs.AssetFS{
 		Asset:     asset.Asset,
 		AssetDir:  asset.AssetDir,
 		AssetInfo: asset.AssetInfo,
-		Prefix:    "D:/Program Files/work/go/workSpaces_go_online_01/crocodile",
-	}*/
+	}
 
 	defer conn.Close()
 	for _, tbname := range crcocodileTables {
@@ -96,14 +97,13 @@ func StartInstall(ctx context.Context, username, password string) error {
 			name = tbname
 		}
 		sqlfilename := "sql/" + name + ".sql"
-		//file, err := fs.Open(sqlfilename)
-		content, err := ioutil.ReadFile(sqlfilename)
+		file, err := fs.Open(sqlfilename)
 		if err != nil {
 			log.Error("fs.Open failed", zap.String("filename", sqlfilename), zap.Error(err))
 			continue
 		}
 
-		//content, err := ioutil.ReadAll(file)
+		content, err := ioutil.ReadAll(file)
 		if err != nil {
 			log.Error("ioutil.ReadAll failed", zap.Error(err))
 			continue

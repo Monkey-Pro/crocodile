@@ -93,6 +93,7 @@ func getgRPCConn(ctx context.Context, addr string) (*grpc.ClientConn, error) {
 		),
 		grpc.WithDefaultCallOptions(grpc.MaxCallSendMsgSize(16 * 1024 * 1024)), // 16M
 		grpc.WithBlock(),
+		// grpc.WithKeepaliveParams(keepalive.ClientParameters{}),
 		grpc.WithConnectParams(grpc.ConnectParams{Backoff: backoff.Config{MaxDelay: time.Second * 2}, MinConnectTimeout: time.Second * 2}),
 	}
 
@@ -127,6 +128,9 @@ func NewgRPCServer(mode define.RunMode) (*grpc.Server, error) {
 			middleware.CheckSecretInterceptor,
 		),
 		grpc.MaxRecvMsgSize(16 * 1024 * 1024),
+		// grpc.KeepaliveParams(keepalive.ServerParameters{
+		// 	MaxConnectionIdle: 5 * time.Minute, // <--- This fixes it!
+		// }),
 	}
 	if config.CoreConf.Cert.Enable {
 		c, err := credentials.NewServerTLSFromFile(config.CoreConf.Cert.CertFile, config.CoreConf.Cert.KeyFile)
@@ -284,7 +288,7 @@ func RegistryClient(version string, port int) {
 				}
 				cannotconn = 0
 				cancel()
-				log.Info("send hearbeat success", zap.String("server", lastaddr))
+				log.Debug("send hearbeat success", zap.String("server", lastaddr))
 				timer.Reset(defaultHearbeatInterval)
 			case <-clentstophb:
 				log.Info("Stop Send HearBeat")

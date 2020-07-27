@@ -8,11 +8,11 @@ import (
 	"net"
 	"strings"
 	"sync"
-
-	"crocodile/common/log"
-	"crocodile/core/model"
-	pb "crocodile/core/proto"
-	"crocodile/core/tasktype"
+	"github.com/labulaka521/crocodile/core/utils/resp"
+	"github.com/labulaka521/crocodile/common/log"
+	"github.com/labulaka521/crocodile/core/model"
+	pb "github.com/labulaka521/crocodile/core/proto"
+	"github.com/labulaka521/crocodile/core/tasktype"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/peer"
@@ -86,8 +86,6 @@ type TaskService struct {
 // if start run,every output must be output by stream.Send
 // return err must be err
 func (ts *TaskService) RunTask(req *pb.TaskReq, stream pb.Task_RunTaskServer) error {
-	log.Debug("recv new task", zap.Any("taskid", req.GetTaskId()),zap.Int32("codetype", req.TaskType))
-
 	// save running task
 	r, err := tasktype.GetDataRun(req)
 	if err != nil {
@@ -97,7 +95,7 @@ func (ts *TaskService) RunTask(req *pb.TaskReq, stream pb.Task_RunTaskServer) er
 		}
 		return nil
 	}
-
+	log.Info("recv new task", zap.Any("taskid", req.GetTaskId()), zap.String("codetype", r.Type()))
 	taskctx, taskcancel := context.WithCancel(stream.Context())
 
 	runningtask.Add(req.GetTaskId(), taskcancel)

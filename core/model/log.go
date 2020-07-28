@@ -162,6 +162,7 @@ func GetTreeLog(ctx context.Context, id string, startTime int64) ([]*define.Task
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, sqlget)
+	defer stmt.Close()
 	if err != nil {
 		return nil, err
 	}
@@ -169,7 +170,6 @@ func GetTreeLog(ctx context.Context, id string, startTime int64) ([]*define.Task
 	var taskreposbyte []byte
 	fmt.Println(startTime)
 	err = stmt.QueryRowContext(ctx, startTime, id).Scan(&taskreposbyte)
-	defer stmt.Close()
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return make([]*define.TaskStatusTree, 0), nil
@@ -303,7 +303,6 @@ func CleanTaskLog(ctx context.Context, name, taskid string, deletetime int64) (i
 	if err != nil {
 		return 0, fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 
 	res, err := stmt.ExecContext(ctx, args...)
 	if err != nil {
@@ -346,10 +345,10 @@ func SaveOperateLog(ctx context.Context,
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, operatesql)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	columnsdata, err := json.Marshal(columns)
 	_, err = stmt.ExecContext(ctx, uid, username, role, method, module, modulename, operatetime, desc, columnsdata)
 	if err != nil {
@@ -408,12 +407,12 @@ func GetOperate(ctx context.Context, uid, username, method, module string, limit
 	defer conn.Close()
 	log.Debug("sql", zap.String("sql", getsql))
 	stmt, err := conn.PrepareContext(ctx, getsql)
+	defer stmt.Close()
 	if err != nil {
 		return oplogs, 0, fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
 
 	rows, err := stmt.QueryContext(ctx, args...)
-	defer stmt.Close()
 
 	if err != nil {
 		return oplogs, 0, fmt.Errorf("stmt.QueryContext failed: %w", err)

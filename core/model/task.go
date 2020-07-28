@@ -50,10 +50,10 @@ func CreateTask(ctx context.Context, id, name string, tasktype define.TaskType, 
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, createsql)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	createTime := time.Now().Unix()
 	taskdata, _ := json.Marshal(taskData)
 	fmt.Printf("%s\n", taskdata)
@@ -117,10 +117,10 @@ func ChangeTask(ctx context.Context, id string, run bool, tasktype define.TaskTy
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, changesql)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	updateTime := time.Now().Unix()
 	taskdata, _ := json.Marshal(taskData)
 
@@ -159,10 +159,10 @@ func DeleteTask(ctx context.Context, id string) error {
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, deletesql)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	_, err = stmt.ExecContext(ctx, id)
 	if err != nil {
 		return fmt.Errorf("stmt.ExecContext failed: %w", err)
@@ -179,10 +179,10 @@ func TaskIsUse(ctx context.Context, taskid string) (int, error) {
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, querysql)
+	defer stmt.Close()
 	if err != nil {
 		return 0, fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	var count int
 	likequery := "%" + taskid + "%"
 	err = stmt.QueryRowContext(ctx, taskid, likequery, likequery).Scan(&count)
@@ -302,10 +302,10 @@ func getTasks(ctx context.Context,
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, getsql)
+	defer stmt.Close()
 	if err != nil {
 		return tasks, 0, fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 
 	rows, err := stmt.QueryContext(ctx, args...)
 	if err != nil {

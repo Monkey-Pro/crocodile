@@ -115,10 +115,10 @@ func Check(ctx context.Context, table string, checkType checkType, args ...inter
 	defer conn.Close()
 
 	stmt, err := conn.PrepareContext(ctx, check)
+	defer stmt.Close()
 	if err != nil {
 		return false, fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 
 	res := 0
 	err = stmt.QueryRowContext(ctx, args...).Scan(&res)
@@ -142,10 +142,10 @@ func QueryUserRule(ctx context.Context, uid string) (define.Role, error) {
 
 	rolesql := `SELECT role FROM crocodile_user WHERE id=?`
 	stmt, err := conn.PrepareContext(ctx, rolesql)
+	defer stmt.Close()
 	if err != nil {
 		return 0, fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 
 	err = stmt.QueryRowContext(ctx, uid).Scan(&role)
 	if err != nil {
@@ -167,10 +167,10 @@ func GetNameID(ctx context.Context, t string) ([]define.KlOption, error) {
 	defer conn.Close()
 
 	stmt, err := conn.PrepareContext(ctx, getsql)
+	defer stmt.Close()
 	if err != nil {
 		return nil, fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 
 	rows, err := stmt.QueryContext(ctx)
 	if err != nil {
@@ -217,10 +217,10 @@ func countColums(ctx context.Context, querysql string, args ...interface{}) (int
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, querysql2)
+	defer stmt.Close()
 	if err != nil {
 		return 0, fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	var count int
 	err = stmt.QueryRowContext(ctx, args...).Scan(&count)
 	if err != nil {

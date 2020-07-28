@@ -28,10 +28,10 @@ func RegistryToUpdateHost(ctx context.Context, req *pb.RegistryReq) error {
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, updatesql)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	addr := fmt.Sprintf("%s:%d", req.Ip, req.Port)
 	_, err = stmt.ExecContext(ctx, req.Weight, req.Version, time.Now().Unix(), req.Remark, addr)
 	if err != nil {
@@ -68,10 +68,10 @@ func RegistryNewHost(ctx context.Context, req *pb.RegistryReq) (string, error) {
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, hostsql)
+	defer stmt.Close()
 	if err != nil {
 		return "", fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	id := utils.GetID()
 	_, err = stmt.ExecContext(ctx,
 		id,
@@ -98,10 +98,10 @@ func UpdateHostHearbeat(ctx context.Context, ip string, port int32, runningtasks
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, updatesql)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	result, err := stmt.ExecContext(ctx,
 		time.Now().Unix(),
 		strings.Join(runningtasks, ","),
@@ -171,10 +171,10 @@ func getHosts(ctx context.Context, addr string, ids []string, offset, limit int)
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, getsql)
+	defer stmt.Close()
 	if err != nil {
 		return nil, 0, fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	rows, err := stmt.QueryContext(ctx, args...)
 	if err != nil {
 		return nil, 0, fmt.Errorf("stmt.QueryContext failed: %w", err)
@@ -273,6 +273,7 @@ func StopHost(ctx context.Context, hostid string, stop bool) error {
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, stopsql)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
@@ -296,6 +297,7 @@ func DeleteHost(ctx context.Context, hostid string) error {
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, deletehostsql)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}

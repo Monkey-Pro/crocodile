@@ -24,10 +24,10 @@ func CreateHostgroup(ctx context.Context, name, remark, createByID string, hosti
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, createsql)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	createTime := time.Now().Unix()
 	_, err = stmt.ExecContext(ctx,
 		utils.GetID(),
@@ -52,10 +52,10 @@ func ChangeHostGroup(ctx context.Context, hostids []string, id, remark string) e
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, changesql)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	_, err = stmt.ExecContext(ctx,
 		strings.Join(hostids, ","),
 		remark,
@@ -77,10 +77,10 @@ func DeleteHostGroup(ctx context.Context, id string) error {
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, sqldelete)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	_, err = stmt.ExecContext(ctx, id)
 	if err != nil {
 		return fmt.Errorf("stmt.ExecContext failed: %w", err)
@@ -130,10 +130,10 @@ func getHostGroups(ctx context.Context, id, hgname string, limit, offset int) ([
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, getsql)
+	defer stmt.Close()
 	if err != nil {
 		return hgs, 0, fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	rows, err := stmt.QueryContext(ctx, args...)
 	if err != nil {
 		return hgs, 0, fmt.Errorf("stmt.QueryContext failed: %w", err)

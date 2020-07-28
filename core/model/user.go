@@ -32,10 +32,10 @@ func LoginUser(ctx context.Context, name string, password string) (string, error
 	defer conn.Close()
 
 	stmt, err := conn.PrepareContext(ctx, loguser)
+	defer stmt.Close()
 	if err != nil {
 		return "", fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 
 	err = stmt.QueryRowContext(ctx, name).Scan(&uid, &hashpassword, &forbid)
 	if err != nil && err != sql.ErrNoRows {
@@ -77,10 +77,10 @@ func AddUser(ctx context.Context, name, hashpassword string, role define.Role) e
 	defer conn.Close()
 
 	stmt, err := conn.PrepareContext(ctx, adduser)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 
 	now := time.Now().Unix()
 	id := utils.GetID()
@@ -152,10 +152,10 @@ func getusers(ctx context.Context, uids []string, name string, offset, limit int
 	defer conn.Close()
 
 	stmt, err := conn.PrepareContext(ctx, getsql)
+	defer stmt.Close()
 	if err != nil {
 		return users, 0, fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	rows, err := stmt.QueryContext(ctx, args...)
 	if err != nil {
 		return users, 0, fmt.Errorf("stmt.QueryContext failed: %w", err)
@@ -288,10 +288,10 @@ func AdminChangeUser(ctx context.Context, id string, role define.Role, forbid bo
 		}
 	}
 	stmt, err := conn.PrepareContext(ctx, changeuser)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 
 	_, err = stmt.ExecContext(ctx, role,
 		forbid,
@@ -344,10 +344,10 @@ func ChangeUserInfo(ctx context.Context, id, name, email, wechat, dingding, tele
 						id=?`
 
 	stmt, err := conn.PrepareContext(ctx, changeuser)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 
 	_, err = stmt.ExecContext(ctx, hashpassword,
 		name,
@@ -374,10 +374,10 @@ func DeleteUser(ctx context.Context, id string) error {
 	}
 	defer conn.Close()
 	stmt, err := conn.PrepareContext(ctx, delsql)
+	defer stmt.Close()
 	if err != nil {
 		return fmt.Errorf("conn.PrepareContext failed: %w", err)
 	}
-	defer stmt.Close()
 	_, err = stmt.ExecContext(ctx, id)
 	if err != nil {
 		return fmt.Errorf("stmt.ExecContext failed: %w", err)

@@ -17,14 +17,14 @@ var (
 // @title Crocidle API
 // @version 1.0
 // @description Crocodile Swaager JSON API
-// @termsOfService https://github.com/labulaka521/crocodile
+// @termsOfService https://crocodile
 
 // @contact.name labulaka521
 // @contact.url http://www.swagger.io/support
 // @contact.email labulakalia@gmail.com
 
 // @license.name MIT 2.0
-// @license.url https://github.com/labulaka521/crocodile/blob/master/LICENSE
+// @license.url https://crocodile/blob/master/LICENSE
 
 // @securityDefinitions.basic BasicAuth
 // @securityDefinitions.apikey ApiKeyAuth

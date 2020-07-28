@@ -13,12 +13,10 @@ require (
 	github.com/gin-gonic/gin v1.5.0
 	github.com/go-redis/redis v6.15.7+incompatible
 	github.com/go-sql-driver/mysql v1.5.0
-	github.com/gogf/gf v1.13.0
 	github.com/golang/protobuf v1.3.3
 	github.com/gorhill/cronexpr v0.0.0-20180427100037-88b0669f7d75
 	github.com/gorilla/websocket v1.4.1
 	github.com/grpc-ecosystem/go-grpc-middleware v1.1.0
-	github.com/labulaka521/crocodile v1.1.6
 	github.com/mattn/go-sqlite3 v1.11.0
 	github.com/pkg/errors v0.8.1
 	github.com/prometheus/client_golang v1.1.0
@@ -28,7 +26,7 @@ require (
 	github.com/swaggo/swag v1.6.5
 	go.uber.org/zap v1.12.0
 	golang.org/x/crypto v0.0.0-20191108234033-bd318be0434a
-	golang.org/x/text v0.3.2
+	golang.org/x/sys v0.0.0-20200515095857-1151b9dac4a9 // indirect
 	google.golang.org/grpc v1.25.1
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 	gopkg.in/tucnak/telebot.v2 v2.0.0-20200120165535-b6c3367fed99

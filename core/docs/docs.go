@@ -19,7 +19,7 @@ var doc = `{
     "info": {
         "description": "{{.Description}}",
         "title": "{{.Title}}",
-        "termsOfService": "https://github.com/labulaka521/crocodile",
+        "termsOfService": "https://crocodile",
         "contact": {
             "name": "labulaka521",
             "url": "http://www.swagger.io/support",
@@ -27,7 +27,7 @@ var doc = `{
         },
         "license": {
             "name": "MIT 2.0",
-            "url": "https://github.com/labulaka521/crocodile/blob/master/LICENSE"
+            "url": "https://crocodile/blob/master/LICENSE"
         },
         "version": "{{.Version}}"
     },

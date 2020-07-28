@@ -1,9 +1,9 @@
 # Crocodile 分布式任务调度系统
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/labulaka521/crocodile/Build_release)
-[![Downloads](https://img.shields.io/github/downloads/labulaka521/crocodile/total.svg)](https://github.com/labulaka521/crocodile/releases)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/labulaka521/crocodile/blob/master/LICENSE)
-[![Release](https://img.shields.io/github/release/labulaka521/crocodile.svg?label=Release)](https://github.com/labulaka521/crocodile/releases)
+[![Downloads](https://img.shields.io/github/downloads/labulaka521/crocodile/total.svg)](https://crocodile/releases)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://crocodile/blob/master/LICENSE)
+[![Release](https://img.shields.io/github/release/labulaka521/crocodile.svg?label=Release)](https://crocodile/releases)
 
 
 [English](./README.md) | 中文 
@@ -106,14 +106,14 @@ docker run -d --net host -v /mnt/platform/docker/truth/job-center:/var/www --nam
 ## Quick Start
 
 ```
-git clone https://github.com/labulaka521/crocodile
+git clone https://crocodile
 cd crocodile
 docker-compose up -d
 ```
 然后在浏览器中打开`http://ip:8080`
 
 ## Running
-- [点击下载](https://github.com/labulaka521/crocodile/releases)后解压
+- [点击下载](https://crocodile/releases)后解压
 - 安装redis、mysql，然后修改配置文件
 - 如果需要开启调度节点之间的证书认证，请生成证书，
     运行生成cert证书的命令
@@ -134,7 +134,7 @@ docker-compose up -d
     ```
     ./crocodile version
     ```
-- [配置报警](https://github.com/labulaka521/crocodile/wiki/%E9%85%8D%E7%BD%AE%E6%8A%A5%E8%AD%A6%E9%80%9A%E7%9F%A5)
+- [配置报警](https://crocodile/wiki/%E9%85%8D%E7%BD%AE%E6%8A%A5%E8%AD%A6%E9%80%9A%E7%9F%A5)
 
 ## Development
 - 前端
@@ -147,7 +147,7 @@ docker-compose up -d
 > sql目录也是被打包在`go-bindata`中的，在安装时会从`go-bindata`生成的文件读取sql创建语句，如果修改了sql，就重新执行下`make bin-data`
 
 ## Doc
-[Wiki](https://github.com/labulaka521/crocodile/wiki/)
+[Wiki](https://crocodile/wiki/)
 
 # TODO
 [Trello_Crocodile](https://trello.com/b/9o299bds/crocodile)

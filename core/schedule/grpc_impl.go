@@ -8,12 +8,12 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/labulaka521/crocodile/core/utils/resp"
+	"crocodile/core/utils/resp"
 
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/model"
-	pb "github.com/labulaka521/crocodile/core/proto"
-	"github.com/labulaka521/crocodile/core/tasktype"
+	"crocodile/common/log"
+	"crocodile/core/model"
+	pb "crocodile/core/proto"
+	"crocodile/core/tasktype"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/peer"

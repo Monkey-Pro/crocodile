@@ -7,13 +7,13 @@ import (
 	"strings"
 	"time"
 
+	"crocodile/common/db"
+	"crocodile/common/log"
+	"crocodile/common/utils"
+	"crocodile/core/config"
+	"crocodile/core/utils/asset"
+	"crocodile/core/utils/define"
 	assetfs "github.com/elazarl/go-bindata-assetfs"
-	"github.com/labulaka521/crocodile/common/db"
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/common/utils"
-	"github.com/labulaka521/crocodile/core/config"
-	"github.com/labulaka521/crocodile/core/utils/asset"
-	"github.com/labulaka521/crocodile/core/utils/define"
 	"go.uber.org/zap"
 )
 

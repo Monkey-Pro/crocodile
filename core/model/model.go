@@ -7,10 +7,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/labulaka521/crocodile/common/db"
-	"github.com/labulaka521/crocodile/common/log"
-	"github.com/labulaka521/crocodile/core/config"
-	"github.com/labulaka521/crocodile/core/utils/define"
+	"crocodile/common/db"
+	"crocodile/common/log"
+	"crocodile/core/config"
+	"crocodile/core/utils/define"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )

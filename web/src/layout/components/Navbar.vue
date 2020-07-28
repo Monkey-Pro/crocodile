@@ -9,7 +9,7 @@
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
-      <a target="_blank" href="https://github.com/labulaka521/crocodile/wiki" class="doc">帮助文档</a>
+      <a target="_blank" href="https://crocodile/wiki" class="doc">帮助文档</a>
       <el-badge :value="notifycount" class="badge">
         <router-link to="/notify">
           <i style="font-size: 16px;height:32px;" class="el-icon-bell"></i>

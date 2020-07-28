@@ -12,6 +12,11 @@
 ## Introduction
 基于Golang开发的分布式任务调度系统，支持http、golang、python、shell、python3、nodejs、bat等调度任务  
 
+## 启动job-center
+docker run -d --net host -v /mnt/platform/docker/truth/job-center:/var/www --name job-server --restart=always my-micro ./crocodile-server_linux_amd64 server -c ./config/core.toml
+docker run -d --net host -v /mnt/platform/docker/truth/job-center:/var/www --name job-client --restart=always my-micro ./crocodile-server_linux_amd64 client -c ./config/core.toml
+
+
 ## Screenshot
 <details>
 <summary>点击我</summary>
